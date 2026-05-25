@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Beaker } from 'lucide-react';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+
 export default function DashboardPage() {
   const [formData, setFormData] = useState({
     Temperature: 25, Humidity: 60, Rainfall: 1000, 
@@ -39,7 +41,7 @@ export default function DashboardPage() {
         Fertilizer_Used_Last_Season: Number(formData.Fertilizer_Used_Last_Season),
         Yield_Last_Season: Number(formData.Yield_Last_Season),
       };
-      const res = await axios.post('http://localhost:8000/predict', formattedData);
+      const res = await axios.post(`${API_BASE_URL}/predict`, formattedData);
       setResult(res.data.recommended_fertilizer);
     } catch (err) {
       console.error(err);

@@ -2,9 +2,9 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
-import pandas as pd
-import joblib
 import os
+import joblib
+import pandas as pd
 
 from database import SessionLocal, engine, Base
 import models
@@ -13,9 +13,12 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
+frontend_origin = os.getenv("FRONTEND_ORIGIN", "*")
+allowed_origins = [origin.strip() for origin in frontend_origin.split(",") if origin.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins or ["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -59,6 +62,10 @@ class PredictionInput(BaseModel):
 @app.get("/")
 def read_root():
     return {"message": "Welcome to Fertilizer Optimizer API"}
+
+@app.get("/health")
+def health_check():
+    return {"status": "ok", "model_loaded": model is not None}
 
 @app.post("/predict")
 def predict_fertilizer(input_data: PredictionInput, db: Session = Depends(get_db)):
