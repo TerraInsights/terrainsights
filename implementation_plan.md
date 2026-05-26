@@ -8,7 +8,7 @@ Build a "Sustainable Fertilizer Usage Optimizer for Higher Yield" full-stack web
 > Please review the proposed technology stack and design approach:
 > - **Frontend**: React via Vite. As per guidelines, I will use **Vanilla CSS** with rich modern aesthetics (gradients, glassmorphism, micro-animations) instead of TailwindCSS.
 > - **Backend**: Python with FastAPI. It's lightweight and integrates seamlessly with Python ML libraries.
-> - **Machine Learning**: Scikit-learn (Random Forest or XGBoost) to train a classification model on `fertilizer_recommendation.csv` to predict the `Recommended_Fertilizer`.
+> - **Machine Learning**: Scikit-learn (Random Forest or XGBoost) to train a classification model on `fertilizer_recommendation_new.csv` to predict the `Recommended_Fertilizer`.
 > - **User Database**: SQLite, as requested.
 
 ## Proposed Changes

@@ -11,7 +11,7 @@ import os
 def train():
     print("Loading data...")
     # Path to the dataset
-    data_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'fertilizer_recommendation.csv')
+    data_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'fertilizer_recommendation_new.csv')
     df = pd.read_csv(data_path)
     
     print("Dataset shape:", df.shape)
